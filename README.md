@@ -1,4 +1,4 @@
 # Philosophy
-Custom wordpress theme
+Custom wordpress theme and this theme is now under dev.
 
 
