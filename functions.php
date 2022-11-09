@@ -9,8 +9,26 @@ function philosophy_theme_setup(){
     add_theme_support("post-thumbnail");
     add_theme_support( 'html5', array( 'search-form', 'comment-list' ) );
     add_theme_support("post-formets", array("audio","video","image","gallery","quote","link"));
+	add_theme_support( 'menus' );
+
+	
 }
 add_action("after_setup_theme","philosophy_theme_setup");
+
+/*
+* Enable menu options
+*/
+
+if ( ! function_exists( 'mytheme_register_nav_menu' ) ) {
+
+	function mytheme_register_nav_menu(){
+		register_nav_menus( array(
+			'primary_menu' => __( 'Primary Menu', 'philosophy' ),
+			'footer_menu'  => __( 'Footer Menu', 'philosophy' ),
+		) );
+	}
+	add_action( 'after_setup_theme', 'mytheme_register_nav_menu', 0 );
+}
 
 /*
 ** Theme extra file enqueue
