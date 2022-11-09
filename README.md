@@ -1,0 +1,4 @@
+# Philosophy
+Custom wordpress theme
+
+
