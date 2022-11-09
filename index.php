@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html class="no-js" lang="en">
+<html class="no-js" lang="<?php language_attributes(); ?>">
 <head>
 
     <!--- basic page needs
     ================================================== -->
-    <meta charset="utf-8">
+    <meta charset="<?php bloginfo('charset')?>">
     <title>Philosophy</title>
     <meta name="description" content="">
     <meta name="author" content="">
