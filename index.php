@@ -5,7 +5,6 @@
     <!--- basic page needs
     ================================================== -->
     <meta charset="<?php bloginfo('charset')?>">
-    <title>Philosophy</title>
     <meta name="description" content="">
     <meta name="author" content="">
 
