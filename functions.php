@@ -4,13 +4,15 @@
 */
 
 require_once(get_theme_file_path('inc/tgm.php'));
+
+
 /*
 * After setup the theme enable options
 */
 
 function philosophy_theme_setup(){
     add_theme_support("title-tag");
-    add_theme_support("post-thumbnail");
+    add_theme_support( 'post-thumbnails' );
     add_theme_support( 'html5', array( 'comment-list', 'comment-form', 'search-form', 'gallery', 'caption' ) );
     add_theme_support("post-formets", array("audio","video","image","gallery","quote","link"));
 	add_theme_support( 'menus' );
