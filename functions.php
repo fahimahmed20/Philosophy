@@ -1,5 +1,9 @@
 <?php
+/*
+* Require template parts
+*/
 
+require_once(get_theme_file_path('inc/tgm.php'));
 /*
 * After setup the theme enable options
 */
@@ -7,11 +11,13 @@
 function philosophy_theme_setup(){
     add_theme_support("title-tag");
     add_theme_support("post-thumbnail");
-    add_theme_support( 'html5', array( 'search-form', 'comment-list' ) );
+    add_theme_support( 'html5', array( 'comment-list', 'comment-form', 'search-form', 'gallery', 'caption' ) );
     add_theme_support("post-formets", array("audio","video","image","gallery","quote","link"));
 	add_theme_support( 'menus' );
-
-	
+	add_theme_support( 'automatic-feed-links' );
+    add_theme_support( 'customize-selective-refresh-widgets' );
+	add_theme_support( 'editor-styles' );
+	add_theme_support( 'wp-block-styles' );
 }
 add_action("after_setup_theme","philosophy_theme_setup");
 
@@ -48,3 +54,15 @@ function add_scripts(){
     wp_enqueue_script("main-js",get_theme_file_uri("assets/js/main.js"),array("jquery"),1.0,true);
 }
 add_action("wp_enqueue_scripts","add_scripts");
+
+/*
+** Classic editor enable
+*/
+
+if ( version_compare($GLOBALS['wp_version'], '5.0-beta', '>') ) {
+    // WP > 5 beta
+    add_filter( 'use_block_editor_for_post_type', '__return_false', 100 );
+} else {
+    // WP < 5 beta
+    add_filter( 'gutenberg_can_edit_post_type', '__return_false' );
+}
