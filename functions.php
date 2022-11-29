@@ -14,12 +14,14 @@ function philosophy_theme_setup(){
     add_theme_support("title-tag");
     add_theme_support( 'post-thumbnails' );
     add_theme_support( 'html5', array( 'comment-list', 'comment-form', 'search-form', 'gallery', 'caption' ) );
-    add_theme_support("post-formets", array("audio","video","image","gallery","quote","link"));
+    //add_theme_support("post-formets", array("audio","video","image","gallery","quote","link"));
+    add_theme_support( 'post-formats', array('aside','audio','chat','gallery','image','link','quote','status','video') );
 	add_theme_support( 'menus' );
 	add_theme_support( 'automatic-feed-links' );
     add_theme_support( 'customize-selective-refresh-widgets' );
 	add_theme_support( 'editor-styles' );
 	add_theme_support( 'wp-block-styles' );
+    add_image_size('philosophy-image',400,400,true);
 }
 add_action("after_setup_theme","philosophy_theme_setup");
 
