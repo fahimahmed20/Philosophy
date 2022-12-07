@@ -68,11 +68,13 @@
 
                     <h2 class="header__nav-heading h6">Site Navigation</h2>
 					<?php
-					wp_nav_menu( array(
+					$philosophy_nav = wp_nav_menu( array(
 						'theme_location' => 'primary_menu',
 						'menu_class' => 'header__nav',
-						
+						'echo' => false
 					) );
+					$philosophy_nav = str_replace('menu-item-has-children','menu-item-has-children has-children',$philosophy_nav);
+					echo $philosophy_nav;
 					?>
 
                     <a href="#0" title="Close Menu" class="header__overlay-close close-mobile-menu">Close</a>
