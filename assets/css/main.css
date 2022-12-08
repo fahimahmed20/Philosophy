@@ -3628,6 +3628,8 @@ footer h4::after {
 
 .s-content__media img {
    vertical-align: bottom;
+   height: 100%;
+   width: 100%;
 }
 
 .s-content__media, .s-content__post-thumb {
