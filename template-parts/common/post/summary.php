@@ -12,8 +12,6 @@
 </div>
 <div class="entry__meta">
     <span class="entry__meta-links">
-        <!-- <a href="category.html">Design</a>
-        <a href="category.html">Photography</a> -->
         <?php the_tags('','','');?>
     </span>
 </div>

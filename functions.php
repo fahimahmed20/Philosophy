@@ -89,7 +89,8 @@ function philosophy_pagi(){
 	echo $links;
 }
 
+/*
+** category description extra pragraph remove
+*/
 
-
-
-
+remove_action('term_description','wpautop');
