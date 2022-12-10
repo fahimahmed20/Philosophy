@@ -22,6 +22,7 @@ function philosophy_theme_setup(){
 	add_theme_support( 'editor-styles' );
 	add_theme_support( 'wp-block-styles' );
     add_image_size('philosophy-image',400,400,true);
+	remove_theme_support( 'widgets-block-editor' );
 }
 add_action("after_setup_theme","philosophy_theme_setup");
 
@@ -94,3 +95,30 @@ function philosophy_pagi(){
 */
 
 remove_action('term_description','wpautop');
+/*
+** gutenburg editor active
+*/
+if ( version_compare($GLOBALS['wp_version'], '5.0-beta', '>') ) {
+    // WP > 5 beta
+    add_filter( 'use_block_editor_for_post_type', '__return_false', 100 );
+} else {
+    // WP < 5 beta
+    add_filter( 'gutenberg_can_edit_post_type', '__return_false' );
+}
+
+
+/*
+** register side bar for about page
+*/
+function about_page_widget() {
+	register_sidebar( array(
+		'name'          => __( 'About page sidebar', 'philosophy' ),
+		'id'            => 'about_page',
+		'description'   => __( 'Widgets in this area will be shown on about pages.', 'philosophy' ),
+		'before_widget' => '<div id="%1$s" class="col-block %2$s">',
+		'after_widget'  => '</div>',
+		'before_title'  => '<h3 class="quarter-top-margin">',
+		'after_title'   => '</h3>',
+	) );
+}
+add_action( 'widgets_init', 'about_page_widget' );
