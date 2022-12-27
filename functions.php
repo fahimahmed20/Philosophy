@@ -4,6 +4,7 @@
 */
 
 require_once(get_theme_file_path('inc/tgm.php'));
+require_once(get_theme_file_path('inc/acf.php'));
 require_once(get_theme_file_path('inc/attachment.php'));
 
 /*
@@ -21,11 +22,21 @@ function philosophy_theme_setup(){
     add_theme_support( 'customize-selective-refresh-widgets' );
 	add_theme_support( 'editor-styles' );
 	add_theme_support( 'wp-block-styles' );
+	add_theme_support( 'custom-logo' );
     add_image_size('philosophy-image',400,400,true);
 	remove_theme_support( 'widgets-block-editor' );
 }
 add_action("after_setup_theme","philosophy_theme_setup");
 
+
+/*
+* Enable svg support
+*/
+function cc_mime_types($mimes) {
+  $mimes['svg'] = 'image/svg+xml';
+  return $mimes;
+}
+add_filter('upload_mimes', 'cc_mime_types');
 /*
 * Enable menu options
 */
@@ -34,8 +45,8 @@ if ( ! function_exists( 'mytheme_register_nav_menu' ) ) {
 
 	function mytheme_register_nav_menu(){
 		register_nav_menus( array(
-			'primary_menu' => __( 'Primary Menu', 'philosophy' ),
-			'footer_menu'  => __( 'Footer Menu', 'philosophy' ),
+			'primary_menu' => __( 'Primary Menu', 'philosophy' )
+			//'footer_menu'  => __( 'Footer Menu', 'philosophy' ),
 		) );
 	}
 	add_action( 'after_setup_theme', 'mytheme_register_nav_menu', 0 );
@@ -120,5 +131,96 @@ function about_page_widget() {
 		'before_title'  => '<h3 class="quarter-top-margin">',
 		'after_title'   => '</h3>',
 	) );
+	register_sidebar( array(
+		'name'          => __( 'Footer to right side widget', 'philosophy' ),
+		'id'            => 'footer_top_right',
+		'description'   => __( 'Widgets in this area will be shown on footer to right side.', 'philosophy' ),
+		'before_widget' => '<div id="%1$s" class="%2$s">',
+		'after_widget'  => '</div>',
+		'before_title'  => '<h3>',
+		'after_title'   => '</h3>',
+	) );
+	register_sidebar( array(
+		'name'          => __( 'Footer Column one', 'philosophy' ),
+		'id'            => 'footer_widget_one',
+		'description'   => __( 'Widgets in this area will be shown on footer column one.', 'philosophy' ),
+		'before_widget' => '<div id="%1$s" class="%2$s">',
+		'after_widget'  => '</div>',
+		'before_title'  => '<h4>',
+		'after_title'   => '</h4>',
+	) );
+	register_sidebar( array(
+		'name'          => __( 'Footer Column Two', 'philosophy' ),
+		'id'            => 'footer_widget_two',
+		'description'   => __( 'Widgets in this area will be shown on footer column two.', 'philosophy' ),
+		'before_widget' => '<div id="%1$s" class="%2$s">',
+		'after_widget'  => '</div>',
+		'before_title'  => '<h4>',
+		'after_title'   => '</h4>',
+	) );
+	register_sidebar( array(
+		'name'          => __( 'Footer Column Three', 'philosophy' ),
+		'id'            => 'footer_widget_three',
+		'description'   => __( 'Widgets in this area will be shown on footer column 3.', 'philosophy' ),
+		'before_widget' => '<div id="%1$s" class="%2$s">',
+		'after_widget'  => '</div>',
+		'before_title'  => '<h4>',
+		'after_title'   => '</h4>',
+	) );
+	register_sidebar( array(
+		'name'          => __( 'Footer Column four', 'philosophy' ),
+		'id'            => 'footer_widget_four',
+		'description'   => __( 'Widgets in this area will be shown on footer column 3.', 'philosophy' ),
+		'before_widget' => '<div id="%1$s" class="%2$s">',
+		'after_widget'  => '</div>',
+		'before_title'  => '<h4>',
+		'after_title'   => '</h4>',
+	) );
+	register_sidebar( array(
+		'name'          => __( 'Footer Soket', 'philosophy' ),
+		'id'            => 'footer_widget_soket',
+		'description'   => __( 'Widgets in this area will be shown on footer column 3.', 'philosophy' ),
+		'before_widget' => '<div id="%1$s" class="%2$s">',
+		'after_widget'  => '</div>',
+		'before_title'  => '<h4>',
+		'after_title'   => '</h4>',
+	) );
 }
 add_action( 'widgets_init', 'about_page_widget' );
+/*
+* add extra jquery
+*/
+function add_script(){
+	?>
+	<script>
+		jQuery(function($){
+			$('#menu-quick-links').addClass('s-footer__linklist');
+			$('#menu-quick-links-1').addClass('s-footer__linklist');
+			$('#menu-social-menu').addClass('s-footer__linklist');
+		})
+	</script>
+<?php
+}
+add_action('wp_footer','add_script');
+/*
+* search form
+*/
+function philosophy_search_form($form){
+	$philosophy_home = home_url('/');
+	$philosophy_search_label = __('Search for:','philosophy');
+	$philosophy_search_btn = __('Search','philosophy');
+	$newform = <<<FORM
+	<form role="search" method="get" class="header__search-form" action="{$philosophy_home}">
+		<label>
+			<span class="hide-content">{$philosophy_search_label}</span>
+			<input type="search" style="color:#fff" class="search-field" placeholder="Type Keywords" value="" name="s" title="{$philosophy_search_label}" autocomplete="off">
+		</label>
+			<input type="submit" class="search-submit" value="{$philosophy_search_btn}">
+	</form>
+	FORM;
+	return $newform;
+}
+add_filter('get_search_form','philosophy_search_form');
+
+
+

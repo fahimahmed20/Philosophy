@@ -1759,8 +1759,8 @@ button::-moz-focus-inner, input::-moz-focus-inner {
 
 .pageheader-content {
    overflow: hidden;
-   padding: 0 75px;
-   max-width: 1350px;
+   padding: 0;
+   max-width: 1440px;
 }
 
 
